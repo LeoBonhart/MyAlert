@@ -1,0 +1,7 @@
+<div class="alert" [class.reverse]="reverse" [class.right]="right">
+    <div class="alert-fix">
+    </div>
+    <div appSmoothHeight [right]="right" [reverse]="reverse" *ngFor="let alert of listAlerts" class="alert-container" (click)="onClick(alert)" >
+        <div #am class="alert-message" [attr.data-color]="alert.color" [innerHTML]="alert.text"></div>
+    </div>
+</div>

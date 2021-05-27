@@ -1,0 +1,85 @@
+@import '~scss-mixin-leobonhart/mixins.scss';
+
+$site_fontSize: 14px;
+$maxW: 568px;
+$minW: 288px;
+
+@mixin alertColor($color) {
+    &[data-color='#{$color}'] {
+        background-color: GetMaterialColor($color,900);
+    }
+}
+%maxMinWidth{
+    max-width: $maxW;
+    min-width: $minW;
+}
+.alert {
+   
+    position: fixed;
+    display: flex;
+    align-content: flex-end;
+    height: 100vh;
+    top: 0px;  
+    z-index: $max-z-index; 
+    @extend %maxMinWidth;
+    width: $maxW;
+    visibility: hidden;
+    font-family: $fontFamily_Material;
+	font-size: $site_fontSize;
+    
+    .alert-fix{
+        display: table-row;
+        height: 100%;
+        display: flex;
+    }
+    .alert-container{
+        position: relative;
+        @extend %maxMinWidth;
+        width: auto;
+        visibility: visible;
+        display: flex;
+
+        .alert-message {
+            color: rgb(255,255,255);
+            background-color: #323232;
+            padding: 14px 24px 14px 24px;
+            border-radius: 2px;
+            @extend %maxMinWidth;
+            display: table;
+            font-weight: 400;
+            font-size: 14px;
+            margin: 10px 0 10px 0;
+            @include alertColor('red');
+            @include alertColor('yellow');
+            @include alertColor('green');
+            @include alertColor('blue');
+
+            z-index: $max-z-index;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
+        }
+    }
+    &.reverse{
+        flex-direction: column-reverse;
+    }
+    &:not(.reverse){
+        flex-direction: column;
+    }
+    &.right{
+        right: 20px;
+        .alert-container{
+            justify-content: flex-end;
+        }
+    }
+    &:not(.right){
+        left: 20px;
+    }
+}
+@include mobile {
+    .alert {
+        max-width: calc(100% - 20px);
+        width: calc(100% - 40px);
+        .alert-container{
+            max-width: calc(100% - 20px);
+        }     
+    }
+}
